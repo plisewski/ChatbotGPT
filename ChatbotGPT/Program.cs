@@ -4,7 +4,7 @@ namespace ChatbotGPT
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .AddUserSecrets<Program>()
@@ -18,7 +18,10 @@ namespace ChatbotGPT
                 return;
             }
 
-            Console.WriteLine("Klucz API OpenAI został poprawnie wczytany");
+            var chatBotService = new ChatBotService(apiKey);
+            var ui = new ConsoleChatUi(chatBotService);
+
+            await ui.RunAsync();
         }
     }
 }
