@@ -1,9 +1,9 @@
 ﻿using OpenAI.Chat;
 using System.ClientModel;
 
-namespace ChatbotGPT
+namespace ChatbotGPT.Core
 {
-    internal class ChatBotService
+    internal class ChatBotService : IChatBotService
     {
         private const int MaxHistoryMessages = 10;
 
@@ -11,15 +11,12 @@ namespace ChatbotGPT
         private const int MaxRetries = 3;
         private const int InitialDelayMs = 500;
 
-        private readonly ChatClient _client;
+        private readonly IChatCompletionClient _chatClient;
         private readonly List<ChatMessage> _messages = new();
 
-        public ChatBotService(string apiKey)
+        public ChatBotService(IChatCompletionClient chatClient)
         {
-            _client = new ChatClient(
-                model: "gpt-5-mini",
-                apiKey: apiKey
-            );
+            _chatClient = chatClient;
 
             // System prompt – always kept
             _messages.Add(new SystemChatMessage(
@@ -38,7 +35,7 @@ namespace ChatbotGPT
             try
             {
                 var response = await ExecuteWithRetryAsync(() =>
-                    _client.CompleteChatAsync(_messages)
+                    _chatClient.CompleteChatAsync(_messages)
                 );
 
                 var answer = response.Value.Content[0].Text;

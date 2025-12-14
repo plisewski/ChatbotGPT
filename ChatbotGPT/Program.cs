@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ChatbotGPT.Core;
+using ChatbotGPT.Infrastructure;
+using ChatbotGPT.UI;
+using Microsoft.Extensions.Configuration;
 
 namespace ChatbotGPT
 {
@@ -19,7 +22,13 @@ namespace ChatbotGPT
                 return;
             }
 
-            var chatBotService = new ChatBotService(apiKey);
+            // Manual DI (composition root)
+            IChatCompletionClient completionClient =
+                new OpenAiChatCompletionClient(apiKey);
+
+            IChatBotService chatBotService =
+                new ChatBotService(completionClient);
+
             var ui = new ConsoleChatUi(chatBotService);
 
             await ui.RunAsync();

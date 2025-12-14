@@ -1,10 +1,12 @@
-﻿namespace ChatbotGPT
+﻿using ChatbotGPT.Core;
+
+namespace ChatbotGPT.UI
 {
     internal class ConsoleChatUi
     {
-        private readonly ChatBotService _chatBotService;
+        private readonly IChatBotService _chatBotService;
 
-        public ConsoleChatUi(ChatBotService chatBotService)
+        public ConsoleChatUi(IChatBotService chatBotService)
         {
             _chatBotService = chatBotService;
         }
