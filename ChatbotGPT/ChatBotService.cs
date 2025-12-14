@@ -12,7 +12,7 @@ namespace ChatbotGPT
         public ChatBotService(string apiKey)
         {
             _client = new ChatClient(
-                model: "gpt-4o-mini",
+                model: "gpt-5-mini",
                 apiKey: apiKey
             );
 
