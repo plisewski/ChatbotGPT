@@ -11,8 +11,9 @@
 
         public async Task RunAsync()
         {
-            Console.WriteLine("ChatBot AI");
-            Console.WriteLine("Wpisz pytanie (exit aby zakończyć)");
+            Console.WriteLine("AI ChatBot");
+            Console.WriteLine("Type your question and press Enter.");
+            Console.WriteLine("Type 'exit' to quit.");
             Console.WriteLine();
 
             while (true)
@@ -26,7 +27,7 @@
                 var response = await _chatBotService.AskAsync(input);
 
                 Console.WriteLine();
-                Console.WriteLine("AI:");
+                Console.WriteLine("AI response:");
                 Console.WriteLine(response);
                 Console.WriteLine();
             }

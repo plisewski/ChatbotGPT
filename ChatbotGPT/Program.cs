@@ -14,7 +14,8 @@ namespace ChatbotGPT
 
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                Console.WriteLine("Brak klucza API OpenAI");
+                Console.WriteLine("OpenAI API key is missing.");
+                Console.WriteLine("Please configure it using User Secrets or environment variables.");
                 return;
             }
 
